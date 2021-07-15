@@ -3,6 +3,7 @@
 [![GitHub version](https://img.shields.io/badge/version-v1.0.0-blue)](https://github.com/trackle-iot/trackle-cpp-library/releases/latest)
 
 If you like **Trackle** - give it a star!
+
 [![GitHub stars](https://img.shields.io/github/stars/trackle-iot/trackle-cpp-library?style=social)](https://github.com/trackle-iot/trackle-cpp-library/stargazers) 
 __________
 
