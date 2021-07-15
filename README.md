@@ -49,7 +49,9 @@ You can add your own hardware types easily (see [these](https://github.com/track
 When you are connected - you can check it in your device list on Trackle Platform - explore all Trackle's features! You can customize any example for your hardware!
 
 ## Documentation and other helpful links
+
 [Full Trackle Documentation](https://docs.iotready.it/) - a complete guide on Blynk features 
+
 [Official Website](https://www.iotready.it/)
 
 **Social Media:**
