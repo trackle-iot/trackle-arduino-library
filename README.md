@@ -1,4 +1,4 @@
-# Trackle Arduino Library 
+# Trackle ESP32 Arduino Library 
 
 [![GitHub version](https://img.shields.io/badge/version-v1.0.0-blue)](https://github.com/trackle-iot/trackle-ESP32-arduino/releases/latest)
 
