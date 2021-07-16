@@ -25,11 +25,11 @@ This Github project provides the Trackle library for the Espressif chips ESP32 u
 * Open "My Devices" section from the drawer
 * Click the button "Claim a device"
 * Select the link "I don't have a device id", then Continue
-* The Device Id will be prompted on the screen and the private key file will be download with name xxxx.der where xxxx is Device ID
+* The Device Id will be shown on the screen and the private key file will be download with name xxxx.der where xxxx is Device ID
 * To estract the key in PEM format (the one you must use in firmware) you need to run from command line:
-'''
+```` 
 openssl ec -in xxxx.der -inform DER -out xxx.pem -outform PEM
-'''
+```` 
 * You should copy the content of xxxx-pem file into your arduino_secret.h as explained below
 
 ## Quickstart: ESP32 WiFi
