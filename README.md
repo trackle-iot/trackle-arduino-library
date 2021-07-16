@@ -17,12 +17,24 @@ We provide [REST APIs](https://docs.iotready.it/cloud-api/introduction) for soft
 **Trackle [Arduino Library](https://github.com/trackle-iot/trackle-arduino-library/releases/latest)**
 
 ## Supported boards, Ethernet, WiFi...
-Trackle supports already a lot of boards, including support for ESP32, Particle, MicroPython, Node.js and many Single Board Computers. 
-You can add your own hardware types easily (see [these](https://github.com/trackle-iot/trackle-arduino-library/tree/master/examples) examples for Arduino)!
+Trackle supports already a lot of boards. 
+This Github project provides the Trackle library for the Espressif chips ESP32 using Arduino IDE.
+
+## Quickstart: Get a Device ID and a private key
+* Create an account on https://platform.iotready.it/
+* Open "My Devices" section from the drawer
+* Click the button "Claim a device"
+* Select the link "I don't have a device id", then Continue
+* The Device Id will be prompted on the screen and the private key file will be download with name xxxx.der where xxxx is Device ID
+* To estract the key in PEM format (the one you must use in firmware) you need to run from command line:
+'''
+openssl ec -in xxxx.der -inform DER -out xxx.pem -outform PEM
+'''
+* You should copy the content of xxxx-pem file into your arduino_secret.h as explained below
 
 ## Quickstart: ESP32 WiFi
 
-* Get a DeviceID and a private key from Trackle Platform
+* Get a Device ID and a private key from Trackle Platform
 * Import this library to Arduino IDE. Guide [here](http://arduino.cc/en/guide/libraries)
 * In Arduino IDE, select File -> Examples -> Trackle -> ESP32 generic WiFi
 * Update your arduino_secrets.h with these information:
@@ -36,7 +48,7 @@ You can add your own hardware types easily (see [these](https://github.com/track
 
 ## Quickstart: ESP32 Prodino Ethernet
 
-* Get a DeviceID and a private key from Trackle Platform
+* Get a Device ID and a private key from Trackle Platform
 * Import this library to Arduino IDE. Guide [here](http://arduino.cc/en/guide/libraries)
 * In Arduino IDE, select File -> Examples -> Trackle -> ESP32 Prodino Ethernet
 * Update your arduino_secrets.h with these information:
@@ -47,15 +59,3 @@ You can add your own hardware types easily (see [these](https://github.com/track
 * Flash your ESP32 with the sample firmware
 
 When you are connected - you can check it in your device list on Trackle Platform - explore all Trackle's features! You can customize any example for your hardware!
-
-## Documentation and other helpful links
-
-[Full Trackle Documentation](https://docs.iotready.it/) - a complete guide on Blynk features 
-
-[Official Website](https://www.iotready.it/)
-
-**Social Media:**
-[LinkedIn](https://www.linkedin.com/company/iotready-s-r-l/)
-
-## Contributing
-We accept contributions from our community: stability bugfixes, new hardware support, or any other improvements.  
