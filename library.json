@@ -1,0 +1,27 @@
+{
+    "name": "Trackle",
+    "version": "1.0.0",
+    "description": "Trackle is an IoT platform that offers all the software and services needed to develop an IoT solution from Device to Cloud",
+    "keywords": "trackle",
+    "repository": {
+        "type": "git",
+        "url": "arduino"
+    },
+    "authors": [
+        {
+            "name": "Flavio Ferrandi",
+            "email": "flavio@iotready.it",
+            "maintainer": true
+        }
+    ],
+    "homepage": "https://www.trackle.io/",
+    "frameworks": "arduino",
+    "platforms": "espressif32",
+    "libArchive": false,
+    "build": {
+        "flags": [
+            "-Lsrc/esp32",
+            "-lTrackle"
+        ]
+    }
+}
