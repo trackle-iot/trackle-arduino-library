@@ -1,4 +1,4 @@
-# ESP32 library for Arduino Core
+# Trackle library for Arduino Core
 
 ````
                      __     _         _ 
@@ -16,14 +16,17 @@ __________
 
 ## What is Trackle
 
-Trackle Platform is an IoT as-a-service platform that offers all the software and services needed to develop an IoT solution from Device to Cloud. [Trackle website](https://www.trackle.io)
+Trackle is an IoT platform that offers all the software and services needed to develop an IoT solution from Device to Cloud. [Trackle website](https://www.trackle.io)
 
 ## Overview
-This document provides step by step instructions to install the ESP32 library and connect your device to Trackle.
+This document provides step by step instructions to install the Trackle library and connect your device to Trackle Cloud.
 You can use Arduino IDE or VS Code (Microsoft Visual Studio Code) with PlatformIO IDE extension.
 
+### Supported hardware
+Trackle library for Arduino Core now supports only ESP32 as board.
+
 ### Download
-**Trackle [ESP32 library for Arduino Core](https://github.com/trackle-iot/trackle-arduino-library/releases/latest)**
+**Trackle [Library for Arduino Core](https://github.com/trackle-iot/trackle-arduino-library/releases/latest)**
 
 ### Installation
 * If you are using Arduino IDE:
@@ -34,7 +37,7 @@ You can use Arduino IDE or VS Code (Microsoft Visual Studio Code) with PlatformI
   * unzip the library into the lib folder
 
 ### Quickstart: Get a Device ID and a private key
-* Create an account on https://platform.iotready.it/
+* Create an account on Trackle Cloud (https://platform.iotready.it/)
 * Open "My Devices" section from the drawer
 * Click the button "Claim a device"
 * Select the link "I don't have a device id", then Continue
@@ -47,7 +50,7 @@ openssl ec -in xxxx.der -inform DER -out xxx.pem -outform PEM
 
 ### Quickstart: ESP32 WiFi
 
-* Get a Device ID and a private key from Trackle Platform
+* Get a Device ID and a private key from Trackle Cloud
 * In Arduino IDE, select File -> Examples -> Trackle -> ESP32 generic WiFi
 * In VS Code, open the file esp32_generic_wifi.ino from the example/esp32_generic_wifi folder
 * Update your arduino_secrets.h with these information:
@@ -61,7 +64,7 @@ openssl ec -in xxxx.der -inform DER -out xxx.pem -outform PEM
 
 ### Quickstart: ESP32 Prodino Ethernet
 
-* Get a Device ID and a private key from Trackle Platform
+* Get a Device ID and a private key from Trackle Cloud
 * In Arduino IDE, select File -> Examples -> Trackle -> ESP32 Prodino Ethernet
 * In VS Code, open the file esp32_prodino_ethernet.ino  from the example/esp32_prodino_ethernet folder
 * Update your arduino_secrets.h with these information:
@@ -71,7 +74,7 @@ openssl ec -in xxxx.der -inform DER -out xxx.pem -outform PEM
 ```` 
 * Flash your ESP32 with the sample firmware
 
-When you are connected - you can check it in your device list on Trackle Platform - explore all Trackle's features! You can customize any example for your hardware!
+When you are connected - you can check it in your device list on Trackle Cloud - explore all Trackle's features! You can customize any example for your hardware!
 
 ## Troubleshooting
 While compiling, if you receive some "reference error to trackle::..." try to rename static library .a in src/esp32/ as libTrackle.a or Trackle.a
