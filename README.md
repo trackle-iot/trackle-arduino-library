@@ -23,7 +23,7 @@ This document provides step by step instructions to install the Trackle library 
 You can use Arduino IDE or VS Code (Microsoft Visual Studio Code) with PlatformIO IDE extension.
 
 ### Supported hardware
-Trackle library for Arduino Core now supports only ESP32 as board.
+Trackle library for Arduino Core now supports only ESP32 based boards.
 
 ### Download
 **Trackle [Library for Arduino Core](https://github.com/trackle-iot/trackle-arduino-library/releases/latest)**
@@ -34,7 +34,7 @@ Trackle library for Arduino Core now supports only ESP32 as board.
   * configure ESP32 boards as explained [here](https://github.com/espressif/arduino-esp32/blob/master/docs/arduino-ide/boards_manager.md)
 * If you are using VS Code (Microsoft Visual Studio Code) with PlatformIO IDE extension:
   * start a new project, select ESP32 board and Arduino as framework
-  * unzip the library into the lib folder
+  * edit platformio.ini and add lib_deps = https://github.com/trackle-iot/trackle-arduino-library/archive/refs/tags/1.0.0.zip
 
 ### Quickstart: Get a Device ID and a private key
 * Create an account on Trackle Cloud (https://platform.iotready.it/)
