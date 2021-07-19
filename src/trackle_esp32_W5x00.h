@@ -48,7 +48,7 @@ int connect_cb_udp(const char *address, int port)
   ret = dns.getHostByName(address, server_ip);
   //printf("%s %d.%d.%d.%d\n", address, server_ip[0], server_ip[1], server_ip[2], server_ip[3]);
   if (ret == 1)
-    trackle.connectionCompleted();
+    Trackle.connectionCompleted();
 
   return ret;
 }

@@ -12,13 +12,13 @@ int setTemperatureTarget(const char *temperature)
 void setup()
 {
   Serial.begin(115200);
-  trackle.begin(DEVICE_ID, PRIVATE_KEY);
-  trackle.post("setTarget", setTemperatureTarget);
-  trackle.get("temperature", temperatureTarget);
-  trackle.connect(SSID, PASSWORD);
+  Trackle.begin(DEVICE_ID, PRIVATE_KEY);
+  Trackle.post("setTarget", setTemperatureTarget);
+  Trackle.get("temperature", temperatureTarget);
+  Trackle.connect(SSID, PASSWORD);
 }
 
 void loop()
 {
-  trackle.loop();
+  Trackle.loop();
 }

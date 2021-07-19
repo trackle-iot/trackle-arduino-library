@@ -172,6 +172,6 @@ public:
   }
 };
 
-TrackleEsp32 trackle;
+TrackleEsp32 Trackle;
 
 #endif /* TrackleBase_h */
