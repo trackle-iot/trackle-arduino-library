@@ -70,7 +70,8 @@ void log_callback(const char *msg, int level, const char *category, void *attrib
 int connect_cb_udp(const char *address, int port);
 int disconnect_cb_udp();
 void time_cb(time_t time, unsigned int param, void *reserved);
-void default_time_cb(time_t time, unsigned int param, void *reserved) {
+void default_time_cb(time_t time, unsigned int param, void *reserved)
+{
   log_callback("Received time from Trackle", INFO, "Trackle", NULL, NULL);
   time_cb(time, param, reserved);
 }
@@ -88,19 +89,37 @@ void my_loop();
 class TrackleEsp32 : public Trackle
 {
 public:
-  void begin(const char *device_id, const char *client_pem)
+  void begin(const char *device_id, const char *client_private_key)
   {
-    log_callback("Initialinzing Trackle configuration", INFO, "Trackle", NULL, NULL);
-      
-    uint8_t str_len = strlen(device_id);
-    for (int i = 0; i < (str_len / 2); i++)
-    {
-      sscanf(device_id + 2 * i, "%02x", (unsigned int *)&deviceId[i]);
-      //printf("bytearray %d: %02x\n", i, deviceId[i]);
-    }
+    log_callback("Initializing Trackle configuration", INFO, "Trackle", NULL, NULL);
 
+    //check device id if string or char
+    uint8_t str_len = strlen(device_id);
+    if (str_len >= 24) //convert from string device_id
+    {
+      for (int i = 0; i < (str_len / 2); i++)
+      {
+        sscanf(device_id + 2 * i, "%02x", (unsigned int *)&deviceId[i]);
+        //printf("bytearray %d: %02x\n", i, deviceId[i]);
+      }
+    }
+    else // device_id already char array
+    {
+      for (int i = 0; i < 12; i++)
+      {
+        deviceId[i] = device_id[i];
+      }
+    }
     setDeviceId(deviceId);
-    convert_pem_to_der((const unsigned char *)client_pem, strlen(client_pem), (unsigned char *)client, &der_size);
+
+    if (strlen(client_private_key) >= 200) //pem key
+    {
+      convert_pem_to_der((const unsigned char *)client_private_key, strlen(client_private_key), (unsigned char *)client, &der_size);
+    }
+    else //der key
+    {
+      memcpy(client, client_private_key, 121);
+    }
 
     setKeys(server, client);
     setMillis(getMillis);
@@ -131,7 +150,7 @@ public:
 
   int connect(uint8_t *mac)
   {
-    log_callback("Starting Ethernet connection", INFO, "Trackle" , NULL, NULL);
+    log_callback("Starting Ethernet connection", INFO, "Trackle", NULL, NULL);
     int res = my_connect(mac);
     if (res >= 0)
     {
@@ -139,14 +158,14 @@ public:
     }
     else
     {
-      log_callback("Error with Ethernet connection", ERROR, "Trackle" , NULL, NULL);
+      log_callback("Error with Ethernet connection", ERROR, "Trackle", NULL, NULL);
       return res;
     }
   }
 
   int connect()
   {
-    log_callback("Starting Ethernet connection", INFO, "Trackle" , NULL, NULL);
+    log_callback("Starting Ethernet connection", INFO, "Trackle", NULL, NULL);
     int res = my_connect();
     if (res >= 0)
     {
@@ -154,14 +173,14 @@ public:
     }
     else
     {
-      log_callback("Error with Ethernet connection", ERROR, "Trackle" , NULL, NULL);
+      log_callback("Error with Ethernet connection", ERROR, "Trackle", NULL, NULL);
       return res;
     }
   }
 
   int configureIp(IPAddress local_ip, IPAddress gateway, IPAddress subnet, IPAddress dns1)
   {
-    log_callback("Configuring ip address", INFO, "Trackle" , NULL, NULL);
+    log_callback("Configuring ip address", INFO, "Trackle", NULL, NULL);
     return my_configure_ip(local_ip, gateway, subnet, dns1);
   }
 
