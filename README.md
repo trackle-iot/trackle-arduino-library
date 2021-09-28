@@ -10,7 +10,7 @@
 ````
 
 
-[![GitHub version](https://img.shields.io/badge/version-v1.0.0-blue)](https://github.com/trackle-iot/trackle-arduino-library/releases/latest) &nbsp; &nbsp;
+[![GitHub version](https://img.shields.io/badge/version-v1.0.2-blue)](https://github.com/trackle-iot/trackle-arduino-library/releases/latest) &nbsp; &nbsp;
 [![GitHub stars](https://img.shields.io/github/stars/trackle-iot/trackle-arduino-library?style=social)](https://github.com/trackle-iot/trackle-arduino-library/stargazers) 
 __________
 
@@ -34,10 +34,10 @@ Trackle library for Arduino Core now supports only ESP32 based boards.
   * configure ESP32 boards as explained [here](https://github.com/espressif/arduino-esp32/blob/master/docs/arduino-ide/boards_manager.md)
 * If you are using VS Code (Microsoft Visual Studio Code) with PlatformIO IDE extension:
   * start a new project, select ESP32 board and Arduino as framework
-  * edit platformio.ini and add lib_deps = https://github.com/trackle-iot/trackle-arduino-library/archive/refs/tags/1.0.1.zip
+  * edit platformio.ini and add lib_deps = https://github.com/trackle-iot/trackle-arduino-library/archive/refs/tags/1.0.2.zip
 
 ### Quickstart: Get a Device ID and a private key
-* Create an account on Trackle Cloud (https://platform.iotready.it/)
+* Create an account on Trackle Cloud (https://trackle.cloud/)
 * Open "My Devices" section from the drawer
 * Click the button "Claim a device"
 * Select the link "I don't have a device id", then Continue
