@@ -130,7 +130,6 @@ public:
     setConnectCallback(connect_cb_udp);
     setDisconnectCallback(disconnect_cb_udp);
     setSystemTimeCallback(default_time_cb);
-    setKeepalive(30 * 1000);
   }
 
   int connect(const char *p_ssid, const char *p_pass)

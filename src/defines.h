@@ -1,8 +1,8 @@
 #ifndef Trackle_defines
 #define Trackle_defines
 
-#include <stdbool.h>
 #include <stdint.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <time.h>
 
@@ -19,6 +19,7 @@ typedef enum
     VAR_STRING = 4,
     VAR_CHAR = 5,
     VAR_LONG = 6,
+    VAR_JSON = 7,
     VAR_DOUBLE = 9
 } Data_TypeDef;
 
@@ -36,9 +37,14 @@ typedef enum
     SOCKET_READY = 2
 } Connection_Status_Type;
 
-typedef int(user_function_int_char_t)(const char* paramString);
+typedef int(user_function_int_char_t)(const char *paramString, ...);
 
-typedef void (*EventHandler)(const char* name, const char* data);
+typedef bool(user_variable_bool_cb_t)(const char *paramString);
+typedef int(user_variable_int_cb_t)(const char *paramString);
+typedef double(user_variable_double_cb_t)(const char *paramString);
+typedef const char *(user_variable_char_cb_t)(const char *paramString);
+
+typedef void (*EventHandler)(const char *name, const char *data);
 
 typedef enum
 {
@@ -53,6 +59,14 @@ typedef enum
     WITH_ACK = 0x8,
     ALL_FLAGS = NO_ACK | WITH_ACK
 } Event_Flags;
+
+typedef enum
+{
+    OTA_ERROR = 0x00,
+    OTA_SUCCESS = 0x01,
+    OTA_VALIDATE_ONLY = 0x02,
+    OTA_DONT_RESET = 0x04
+} UpdateFlag;
 
 typedef enum
 {
@@ -162,37 +176,33 @@ typedef struct SessionPersistDataOpaque
     uint8_t data[SessionPersistBaseSize - sizeof(uint16_t) + SessionPersistVariableSize];
 } SessionPersistDataOpaque;
 
-#if HAL_PLATFORM_CLOUD_UDP
 #define DEVICE_ID_LENGTH 12
 #define PUBLIC_KEY_LENGTH 92
 #define PRIVATE_KEY_LENGTH 122
-#else
-#define DEVICE_ID_LENGTH 12
-#define PUBLIC_KEY_LENGTH 296
-#define PRIVATE_KEY_LENGTH 612
-#endif
 
 typedef uint32_t system_tick_t;
 
 typedef system_tick_t(millisCallback)(void);
-typedef int(sendCallback)(const unsigned char* buf, uint32_t buflen, void* tmp);
-typedef int(receiveCallback)(unsigned char* buf, uint32_t buflen, void* tmp);
-typedef int(connectCallback)(const char* address, int port);
+typedef int(sendCallback)(const unsigned char *buf, uint32_t buflen, void *tmp);
+typedef int(receiveCallback)(unsigned char *buf, uint32_t buflen, void *tmp);
+typedef int(connectCallback)(const char *address, int port);
 typedef int(disconnectCallback)(void);
-typedef void(publishCompletionCallback)(int error, const void* data, void* callbackData,
-                                        void* reserved);
-typedef void(publishSendCallback)(const char* eventName, const char* data, const char* key,
-                                  bool published);
-typedef void(prepareFirmwareUpdateCallback)(struct Chunk data, uint32_t flags, void* reserved);
-typedef void(firmwareChunkCallback)(struct Chunk data, const unsigned char* chunk, void*);
-typedef void(finishFirmwareUpdateCallback)(char* data, uint32_t fileSize);
+typedef void(publishCompletionCallback)(int error, const void *data, void *callbackData, void *reserved);
+typedef void(publishSendCallback)(const char *eventName, const char *data, const char *key, bool published);
+typedef void(prepareFirmwareUpdateCallback)(struct Chunk data, uint32_t flags, void *reserved);
+typedef void(firmwareChunkCallback)(struct Chunk data, const unsigned char *chunk, void *);
+typedef void(finishFirmwareUpdateCallback)(char *data, uint32_t fileSize);
+typedef void(firmwareUrlUpdateCallback)(const char *data);
+typedef void(connectionStatusCallback)(Connection_Status_Type status);
+typedef int(updatePropertyCallback)(const char *function_key, const char *arg, ...);
 typedef int(usedMemoryCallback)(void);
-typedef void(signalCallback)(bool on, unsigned int param, void* reserved);
-typedef void(timeCallback)(time_t time, unsigned int param, void*);
-typedef void(logCallback)(const char* msg, int level, const char* category, void* attribute,
-                          void* reserved);
-typedef int(restoreSessionCallback)(void* buffer, size_t length, uint8_t type, void* reserved);
-typedef int(saveSessionCallback)(const void* buffer, size_t length, uint8_t type, void* reserved);
+typedef void(signalCallback)(bool on, unsigned int param, void *reserved);
+typedef void(timeCallback)(time_t time, unsigned int param, void *);
+typedef void(rebootCallback)(const char *data);
+typedef void(pincodeCallback)(const char *data);
+typedef void(logCallback)(const char *msg, int level, const char *category, void *attribute, void *reserved);
+typedef int(restoreSessionCallback)(void *buffer, size_t length, uint8_t type, void *reserved);
+typedef int(saveSessionCallback)(const void *buffer, size_t length, uint8_t type, void *reserved);
 typedef uint32_t(randomNumberCallback)(void);
 
 #endif
