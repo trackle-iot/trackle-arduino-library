@@ -78,9 +78,14 @@ void default_time_cb(time_t time, unsigned int param, void *reserved)
 int send_cb_udp(const unsigned char *buf, uint32_t buflen, void *tmp);
 int receive_cb_udp(unsigned char *buf, uint32_t buflen, void *tmp);
 
-int my_connect(const char *p_ssid, const char *p_pass); //wifi
-int my_connect(uint8_t *mac);                           //ethernet
-int my_connect();                                       //ethernet
+int my_connect(const char *p_ssid, const char *p_pass); // wifi
+int my_connect(uint8_t *mac);                           // ethernet
+int my_connect();                                       // ethernet
+
+IPAddress my_local_ip;
+IPAddress my_gateway;
+IPAddress my_subnet;
+IPAddress my_dns1;
 
 int my_configure_ip(IPAddress local_ip, IPAddress gateway, IPAddress subnet, IPAddress dns1);
 
@@ -93,14 +98,14 @@ public:
   {
     log_callback("Initializing Trackle configuration", INFO, "Trackle", NULL, NULL);
 
-    //check device id if string or char
+    // check device id if string or char
     uint8_t str_len = strlen(device_id);
-    if (str_len >= 24) //convert from string device_id
+    if (str_len >= 24) // convert from string device_id
     {
       for (int i = 0; i < (str_len / 2); i++)
       {
         sscanf(device_id + 2 * i, "%02x", (unsigned int *)&deviceId[i]);
-        //printf("bytearray %d: %02x\n", i, deviceId[i]);
+        // printf("bytearray %d: %02x\n", i, deviceId[i]);
       }
     }
     else // device_id already char array
@@ -112,11 +117,11 @@ public:
     }
     setDeviceId(deviceId);
 
-    if (strlen(client_private_key) >= 200) //pem key
+    if (strlen(client_private_key) >= 200) // pem key
     {
       convert_pem_to_der((const unsigned char *)client_private_key, strlen(client_private_key), (unsigned char *)client, &der_size);
     }
-    else //der key
+    else // der key
     {
       memcpy(client, client_private_key, 121);
     }
@@ -138,6 +143,7 @@ public:
     int res = my_connect(p_ssid, p_pass);
     if (res >= 0)
     {
+      my_configure_ip(my_local_ip, my_gateway, my_subnet, my_dns1);
       return Trackle::connect();
     }
     else
@@ -153,6 +159,7 @@ public:
     int res = my_connect(mac);
     if (res >= 0)
     {
+      my_configure_ip(my_local_ip, my_gateway, my_subnet, my_dns1);
       return Trackle::connect();
     }
     else
@@ -168,6 +175,7 @@ public:
     int res = my_connect();
     if (res >= 0)
     {
+      my_configure_ip(my_local_ip, my_gateway, my_subnet, my_dns1);
       return Trackle::connect();
     }
     else
@@ -180,7 +188,11 @@ public:
   int configureIp(IPAddress local_ip, IPAddress gateway, IPAddress subnet, IPAddress dns1)
   {
     log_callback("Configuring ip address", INFO, "Trackle", NULL, NULL);
-    return my_configure_ip(local_ip, gateway, subnet, dns1);
+    my_local_ip = local_ip;
+    my_gateway = gateway;
+    my_subnet = subnet;
+    my_dns1 = dns1;
+    return 1;
   }
 
   void loop()
