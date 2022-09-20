@@ -14,6 +14,20 @@
 [![GitHub stars](https://img.shields.io/github/stars/trackle-iot/trackle-arduino-library?style=social)](https://github.com/trackle-iot/trackle-arduino-library/stargazers) 
 __________
 
+## Table of contents
+
+1. [Table of contents](#table-of-contents)
+2. [What is Trackle](#what-is-trackle)
+3. [Overview](#overview)
+    1. [Supported hardware](#supported-hardware)
+    2. [Download](#download)
+    3. [Installation](#installation)
+    4. [Quickstart](#quickstart)
+        1. [Get a Device ID and a private key](#get-a-device-id-and-a-private-key)
+        2. [Configure for development with ESP32 WiFi](#configure-for-development-with-esp32-wifi)
+        3. [Configure for development with ESP32 Prodino Ethernet](#configure-for-development-with-esp32-prodino-ethernet)
+4. [Troubleshooting](#troubleshooting)
+
 ## What is Trackle
 
 Trackle is an IoT platform that offers all the software and services needed to develop an IoT solution from Device to Cloud. [Trackle website](https://www.trackle.io)
