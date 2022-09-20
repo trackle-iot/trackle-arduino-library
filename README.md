@@ -34,7 +34,10 @@ Trackle library for Arduino Core now supports only ESP32 based boards.
   * configure ESP32 boards as explained [here](https://github.com/espressif/arduino-esp32/blob/master/docs/arduino-ide/boards_manager.md)
 * If you are using VS Code (Microsoft Visual Studio Code) with PlatformIO IDE extension:
   * start a new project, select ESP32 board and Arduino as framework
-  * edit platformio.ini and add lib_deps = https://github.com/trackle-iot/trackle-arduino-library/archive/refs/tags/1.0.2.zip
+  * edit ```platformio.ini``` and add:
+  ```
+  lib_deps = https://github.com/trackle-iot/trackle-arduino-library/archive/refs/tags/1.3.1.zip
+  ```
 
 ### Quickstart: Get a Device ID and a private key
 * Create an account on Trackle Cloud (https://trackle.cloud/)
